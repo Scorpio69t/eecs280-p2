@@ -105,6 +105,7 @@ const int *Matrix_at(const Matrix *mat, int row, int column)
 {
   assert(row >= 0 && column >= 0);
   assert(row < mat->height && column < mat->width);
+
   const int *ptr = mat->data + (mat->width) * row + column;
   return ptr;
 }
@@ -128,7 +129,7 @@ void Matrix_fill(Matrix *mat, int value)
 void Matrix_fill_border(Matrix *mat, int value)
 {
   int *end = mat->data + (mat->width * mat->height);
-  for (int *ptr = 0; ptr < end; ptr++)
+  for (int *ptr = mat->data; ptr < end; ptr++)
   {
     if (Matrix_column(mat, ptr) == 0 || Matrix_column(mat, ptr) == mat->width - 1 || Matrix_row(mat, ptr) == 0 || Matrix_row(mat, ptr) == mat->height - 1)
       *ptr = value;
@@ -163,16 +164,16 @@ int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
 {
   assert(row >= 0 && column_start >= 0 && column_end >= 0);
   assert(row < mat->height && column_start < mat->width && column_end < mat->width);
-  const int *start = mat->data + row * mat->width + column_start;
-  const int *end = start + column_start - column_end;
+
   int min = 99999;
-  int *index;
-  for (const int *ptr = start; ptr < end; ptr++)
+  const int *index;
+  for (int trace = column_start; trace < column_end; trace++)
   {
-    if (*ptr < min)
+    int temp = *Matrix_at(mat, row, trace);
+    if (temp < min)
     {
-      min = *ptr;
-      index = &min;
+      min = temp;
+      index = Matrix_at(mat, row, trace);
     }
   }
   return Matrix_column(mat, index);
@@ -190,16 +191,14 @@ int Matrix_min_value_in_row(const Matrix *mat, int row,
 {
   assert(row >= 0 && column_start >= 0 && column_end >= 0);
   assert(row < mat->height && column_start < mat->width && column_end < mat->width);
-  const int *start = mat->data + row * mat->width + column_start;
-  const int *end = start + column_start - column_end;
+
   int min = 99999;
-  int *index;
-  for (const int *ptr = start; ptr < end; ptr++)
+  for (int trace = column_start; trace < column_end; trace++)
   {
-    if (*ptr < min)
+    int temp = *Matrix_at(mat, row, trace);
+    if (temp < min)
     {
-      min = *ptr;
-      index = &min;
+      min = temp;
     }
   }
   return min;

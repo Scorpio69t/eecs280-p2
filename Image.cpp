@@ -16,7 +16,7 @@
 // NOTE:     Do NOT use new or delete here.
 void Image_init(Image *img, int width, int height)
 {
-  assert(width>0 && height>0);
+  assert(width > 0 && height > 0);
   assert(width <= MAX_MATRIX_WIDTH && height <= MAX_MATRIX_HEIGHT);
   img->width = width;
   img->height = height;
@@ -116,7 +116,7 @@ void Image_set_pixel(Image *img, int row, int column, Pixel color)
 {
   *Matrix_at(&img->red_channel, row, column) = color.r;
   *Matrix_at(&img->green_channel, row, column) = color.g;
-  *Matrix_at(&img->green_channel, row, column) = color.g;
+  *Matrix_at(&img->blue_channel, row, column) = color.b;
 }
 
 // REQUIRES: img points to a valid Image
