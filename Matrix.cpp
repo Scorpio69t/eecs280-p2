@@ -162,8 +162,8 @@ int Matrix_max(const Matrix *mat)
 int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
                                       int column_start, int column_end)
 {
-  assert(row >= 0 && column_start >= 0 && column_end >= 0);
-  assert(row < mat->height && column_start < mat->width && column_end < mat->width);
+  assert(row >= 0 && row < mat->height);
+  assert(column_end >= 0 && column_end <= mat->width && column_start < column_end && column_start >= 0);
 
   int min = 99999;
   const int *index;
@@ -189,8 +189,8 @@ int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
 int Matrix_min_value_in_row(const Matrix *mat, int row,
                             int column_start, int column_end)
 {
-  assert(row >= 0 && column_start >= 0 && column_end >= 0);
-  assert(row < mat->height && column_start < mat->width && column_end < mat->width);
+  assert(row >= 0 && row < mat->height);
+  assert(column_end >= 0 && column_end <= mat->width && column_start < column_end && column_start >= 0);
 
   int min = 99999;
   for (int trace = column_start; trace < column_end; trace++)

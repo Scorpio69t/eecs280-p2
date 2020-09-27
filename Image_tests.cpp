@@ -3,10 +3,12 @@
 #include "Matrix.h"
 #include "Image_test_helpers.h"
 #include "unit_test_framework.h"
+#include <cassert>
+#include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <cassert>
 
 using namespace std;
 
@@ -89,6 +91,21 @@ TEST(test_fill_basic)
   delete img;
 }
 
+TEST(test_init_from_ppm_basic)
+{
+  Image *img = new Image;
+  ifstream fin;
+  fin.open("dog.ppm");
+  if (!fin.is_open())
+  {
+    cout << "Unable to open" << endl;
+    exit(EXIT_FAILURE);
+  }
+
+  Image_init(img, fin);
+  ASSERT_TRUE(Pixel_equal(Image_get_pixel(img, 0, 2), {255, 255, 250}));
+  delete img;
+}
 // IMPLEMENT YOUR TEST FUNCTIONS HERE
 // You are encouraged to use any functions from Image_test_helpers.h as needed.
 

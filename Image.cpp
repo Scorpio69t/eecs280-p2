@@ -36,8 +36,10 @@ void Image_init(Image *img, int width, int height)
 void Image_init(Image *img, std::istream &is)
 {
   std::string junk;
+  Pixel temp;
   is >> junk;
   is >> img->width >> img->height;
+  is >> junk;
   Matrix_init(&img->red_channel, img->width, img->height);
   Matrix_init(&img->green_channel, img->width, img->height);
   Matrix_init(&img->blue_channel, img->width, img->height);
@@ -46,7 +48,8 @@ void Image_init(Image *img, std::istream &is)
   {
     for (int j = 0; j < img->width; j++)
     {
-      is >> *(Matrix_at(&img->red_channel, i, j)) >> *(Matrix_at(&img->green_channel, i, j)) >> *(Matrix_at(&img->blue_channel, i, j));
+      is >> temp.r >> temp.g >> temp.b;
+      Image_set_pixel(img, i, j, temp);
     }
   }
 }
