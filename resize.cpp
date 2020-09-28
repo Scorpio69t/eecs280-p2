@@ -41,6 +41,6 @@ int main(int argc, char *argv[])
     else
     {
         new_width = (int32_t)argv[3];
-        new_height = (int32_t)argc[4];
+        new_height = (int32_t)argv[4];
     }
 }
