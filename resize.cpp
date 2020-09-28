@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
     if (!fin.is_open())
     {
         cout << "Error opneing file: " << argv[1] << endl;
+        delete img;
         return 1;
     }
     Image_init(img, fin);
@@ -46,12 +47,14 @@ int main(int argc, char *argv[])
     {
         cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n"
              << "WIDTH and HEIGHT must be less than or equal to original" << endl;
+        delete img;
         return 1;
     }
     if (new_height <= 0 || new_height > Image_height(img))
     {
         cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n"
              << "WIDTH and HEIGHT must be less than or equal to original" << endl;
+        delete img;
         return 1;
     }
 
@@ -61,6 +64,7 @@ int main(int argc, char *argv[])
     if (!fout.is_open())
     {
         cout << "Error opneing file: " << argv[1] << endl;
+        delete img;
         return 1;
     }
 
