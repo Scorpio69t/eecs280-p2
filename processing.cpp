@@ -161,7 +161,8 @@ void find_minimal_vertical_seam(const Matrix *cost, int seam[])
 {
   int column_number;
   seam[Matrix_height(cost) - 1] =
-      Matrix_column_of_min_value_in_row(cost, Matrix_height(cost) - 1, 0, Matrix_width(cost));
+      Matrix_column_of_min_value_in_row(cost, Matrix_height(cost) - 1,
+                                        0, Matrix_width(cost));
   for (int i = Matrix_height(cost) - 2; i >= 0; i--)
   {
     if (seam[i + 1] == 0)
