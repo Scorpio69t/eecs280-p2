@@ -19,28 +19,55 @@ int main(int argc, char *argv[])
     {
         cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n"
              << "WIDTH and HEIGHT must be less than or equal to original" << endl;
+        return 1;
     }
     Image *img = new Image;
-    string ifilename = argv[1];
-    string ofilename = argv[2];
     ifstream fin;
-    fin.open(ifilename);
+    ofstream fout;
+    fin.open(argv[1]);
     if (!fin.is_open())
     {
-        cout << "Unable to open " << ifilename << endl;
-        exit(EXIT_FAILURE);
+        cout << "Error opneing file: " << argv[1] << endl;
+        return 1;
     }
     Image_init(img, fin);
+    fin.close();
 
-    int new_width = 0, new_height = 0;
+    int new_width = Image_width(img), new_height = Image_width(img);
     if (argc == 4)
     {
-        new_width = (int32_t)argv[3];
-        new_height = Image_height(img);
+        new_width = stoi(argv[3]);
     }
     else
     {
-        new_width = (int32_t)argv[3];
-        new_height = (int32_t)argv[4];
+        new_width = stoi(argv[3]);
+        new_height = stoi(argv[4]);
+        }
+
+    if (new_width <= 0 || new_width > Image_width(img))
+    {
+        cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n"
+             << "WIDTH and HEIGHT must be less than or equal to original" << endl;
+        return 1;
     }
+    if (new_height <= 0 || new_height > Image_height(img))
+    {
+        cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n"
+             << "WIDTH and HEIGHT must be less than or equal to original" << endl;
+        return 1;
+    }
+
+    seam_carve(img, new_width, new_height);
+
+    fout.open(argv[2]);
+    if (!fout.is_open())
+    {
+        cout << "Error opneing file: " << argv[1] << endl;
+        return 1;
+    }
+
+    Image_print(img, fout);
+    fout.close();
+
+    delete img;
 }
