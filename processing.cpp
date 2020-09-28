@@ -157,11 +157,13 @@ void compute_vertical_cost_matrix(const Matrix *energy, Matrix *cost)
 void find_minimal_vertical_seam(const Matrix *cost, int seam[])
 {
   int column_number;
-  for (int i = Matrix_height(cost) - 1; i >= 0; i--)
+  seam[Matrix_height(cost) - 1] = Matrix_column_of_min_value_in_row(cost, Matrix_height(cost) - 1, 0, Matrix_width(cost));
+  for (int i = Matrix_height(cost) - 2; i >= 0; i--)
   {
-
-    if (i == Matrix_height(cost) - 1)
-      column_number = Matrix_column_of_min_value_in_row(cost, i, 0, Matrix_width(cost));
+    if (seam[i + 1] == 0)
+      column_number = Matrix_column_of_min_value_in_row(cost, i, seam[i + 1], seam[i + 1] + 2);
+    else if (seam[i + 1] == Matrix_width(cost) - 1)
+      column_number = Matrix_column_of_min_value_in_row(cost, i, seam[i + 1] - 1, seam[i + 1] + 1);
     else
       column_number = Matrix_column_of_min_value_in_row(cost, i, seam[i + 1] - 1, seam[i + 1] + 2);
 
