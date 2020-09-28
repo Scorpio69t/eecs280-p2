@@ -102,6 +102,9 @@ int Image_height(const Image *img)
 // EFFECTS:  Returns the pixel in the Image at the given row and column.
 Pixel Image_get_pixel(const Image *img, int row, int column)
 {
+  assert(row >= 0 && row < Image_height(img));
+  assert(column >= 0 && column < Image_width(img));
+
   Pixel target;
   target.r = *Matrix_at(&img->red_channel, row, column);
   target.g = *Matrix_at(&img->green_channel, row, column);
@@ -117,6 +120,9 @@ Pixel Image_get_pixel(const Image *img, int row, int column)
 //           to the given color.
 void Image_set_pixel(Image *img, int row, int column, Pixel color)
 {
+  assert(row >= 0 && row < Image_height(img));
+  assert(column >= 0 && column < Image_width(img));
+
   *Matrix_at(&img->red_channel, row, column) = color.r;
   *Matrix_at(&img->green_channel, row, column) = color.g;
   *Matrix_at(&img->blue_channel, row, column) = color.b;
