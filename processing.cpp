@@ -130,11 +130,14 @@ void compute_vertical_cost_matrix(const Matrix *energy, Matrix *cost)
     for (int j = 0; j < Matrix_width(cost); j++)
     {
       if (j == 0)
-        *Matrix_at(cost, i, j) = *Matrix_at(energy, i, j) + Matrix_min_value_in_row(cost, i - 1, j, j + 2);
+        *Matrix_at(cost, i, j) = *Matrix_at(energy, i, j) +
+                                 Matrix_min_value_in_row(cost, i - 1, j, j + 2);
       else if (j == Matrix_width(cost) - 1)
-        *Matrix_at(cost, i, j) = *Matrix_at(energy, i, j) + Matrix_min_value_in_row(cost, i - 1, j - 1, j + 1);
+        *Matrix_at(cost, i, j) = *Matrix_at(energy, i, j) +
+                                 Matrix_min_value_in_row(cost, i - 1, j - 1, j + 1);
       else
-        *Matrix_at(cost, i, j) = *Matrix_at(energy, i, j) + Matrix_min_value_in_row(cost, i - 1, j - 1, j + 2);
+        *Matrix_at(cost, i, j) = *Matrix_at(energy, i, j) +
+                                 Matrix_min_value_in_row(cost, i - 1, j - 1, j + 2);
     }
   }
 }
@@ -157,15 +160,19 @@ void compute_vertical_cost_matrix(const Matrix *energy, Matrix *cost)
 void find_minimal_vertical_seam(const Matrix *cost, int seam[])
 {
   int column_number;
-  seam[Matrix_height(cost) - 1] = Matrix_column_of_min_value_in_row(cost, Matrix_height(cost) - 1, 0, Matrix_width(cost));
+  seam[Matrix_height(cost) - 1] =
+      Matrix_column_of_min_value_in_row(cost, Matrix_height(cost) - 1, 0, Matrix_width(cost));
   for (int i = Matrix_height(cost) - 2; i >= 0; i--)
   {
     if (seam[i + 1] == 0)
-      column_number = Matrix_column_of_min_value_in_row(cost, i, seam[i + 1], seam[i + 1] + 2);
+      column_number =
+          Matrix_column_of_min_value_in_row(cost, i, seam[i + 1], seam[i + 1] + 2);
     else if (seam[i + 1] == Matrix_width(cost) - 1)
-      column_number = Matrix_column_of_min_value_in_row(cost, i, seam[i + 1] - 1, seam[i + 1] + 1);
+      column_number =
+          Matrix_column_of_min_value_in_row(cost, i, seam[i + 1] - 1, seam[i + 1] + 1);
     else
-      column_number = Matrix_column_of_min_value_in_row(cost, i, seam[i + 1] - 1, seam[i + 1] + 2);
+      column_number =
+          Matrix_column_of_min_value_in_row(cost, i, seam[i + 1] - 1, seam[i + 1] + 2);
 
     seam[i] = column_number;
   }

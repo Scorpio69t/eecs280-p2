@@ -41,8 +41,8 @@ TEST(test_width_height_print_basic)
   Matrix_init(mat, 5, 7);
   Matrix_fill(mat, value);
   Matrix_print(mat, cout);
-  ASSERT_EQUAL(width, mat->width);
-  ASSERT_EQUAL(height, mat->height);
+  ASSERT_EQUAL(width, Matrix_width(mat));
+  ASSERT_EQUAL(height, Matrix_width(mat));
   delete mat;
 }
 TEST(test_at_basic)

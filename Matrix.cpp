@@ -131,7 +131,10 @@ void Matrix_fill_border(Matrix *mat, int value)
   int *end = mat->data + (mat->width * mat->height);
   for (int *ptr = mat->data; ptr < end; ptr++)
   {
-    if (Matrix_column(mat, ptr) == 0 || Matrix_column(mat, ptr) == mat->width - 1 || Matrix_row(mat, ptr) == 0 || Matrix_row(mat, ptr) == mat->height - 1)
+    if (Matrix_column(mat, ptr) == 0 ||
+        Matrix_column(mat, ptr) == mat->width - 1 ||
+        Matrix_row(mat, ptr) == 0 ||
+        Matrix_row(mat, ptr) == mat->height - 1)
       *ptr = value;
   }
 }
@@ -163,7 +166,10 @@ int Matrix_column_of_min_value_in_row(const Matrix *mat, int row,
                                       int column_start, int column_end)
 {
   assert(row >= 0 && row < mat->height);
-  assert(column_end >= 0 && column_end <= mat->width && column_start < column_end && column_start >= 0);
+  assert(column_end >= 0 &&
+         column_end <= mat->width &&
+         column_start < column_end &&
+         column_start >= 0);
 
   int min = 99999;
   const int *index;
@@ -190,7 +196,10 @@ int Matrix_min_value_in_row(const Matrix *mat, int row,
                             int column_start, int column_end)
 {
   assert(row >= 0 && row < mat->height);
-  assert(column_end >= 0 && column_end <= mat->width && column_start < column_end && column_start >= 0);
+  assert(column_end >= 0 &&
+         column_end <= mat->width &&
+         column_start < column_end &&
+         column_start >= 0);
 
   int min = 99999;
   for (int trace = column_start; trace < column_end; trace++)

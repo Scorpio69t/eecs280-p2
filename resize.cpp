@@ -6,8 +6,6 @@
 #include <cstring>
 #include "Image.h"
 #include "processing.h"
-#include "Matrix_test_helpers.h"
-#include "Image_test_helpers.h"
 
 using namespace std;
 
@@ -42,7 +40,7 @@ int main(int argc, char *argv[])
     {
         new_width = stoi(argv[3]);
         new_height = stoi(argv[4]);
-        }
+    }
 
     if (new_width <= 0 || new_width > Image_width(img))
     {
@@ -70,4 +68,6 @@ int main(int argc, char *argv[])
     fout.close();
 
     delete img;
+
+    return 0;
 }
