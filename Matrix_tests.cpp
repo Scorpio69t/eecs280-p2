@@ -18,6 +18,7 @@ using namespace std;
 // that Matrix_at returns that value for each element.
 TEST(test_print_basic)
 {
+  cout << "testing init basic" << endl;
   std::string correct = "2 2\n2 2 \n2 2 \n";
   Matrix *mat = new Matrix;
   Matrix_init(mat, 2, 2);
@@ -29,6 +30,7 @@ TEST(test_print_basic)
 }
 TEST(test_print_edge)
 {
+  cout << "testing print edge" << endl;
   std::string correct = "1 1\n1 \n";
   Matrix *mat = new Matrix;
   Matrix_init(mat, 1, 1);
@@ -41,6 +43,7 @@ TEST(test_print_edge)
 
 TEST(test_init_basic)
 {
+  cout << "testing init basic" << endl;
   Matrix *mat = new Matrix;
   const int width = 3;
   const int height = 5;
@@ -52,6 +55,7 @@ TEST(test_init_basic)
 
 TEST(test_init_edge)
 {
+  cout << "testing init edge" << endl;
   Matrix *mat = new Matrix;
   const int width = 1;
   const int height = 1;
@@ -63,6 +67,7 @@ TEST(test_init_edge)
 
 TEST(test_fill_basic)
 {
+  cout << "testing fill basic" << endl;
   Matrix *mat = new Matrix; // create a Matrix in dynamic memory
 
   const int width = 3;
@@ -83,6 +88,7 @@ TEST(test_fill_basic)
 }
 TEST(test_fill_edge1)
 {
+  cout << "testing fill edge1" << endl;
   Matrix *mat = new Matrix; // create a Matrix in dynamic memory
 
   const int width = 500;
@@ -103,6 +109,7 @@ TEST(test_fill_edge1)
 }
 TEST(test_fill_edge2)
 {
+  cout << "testing fill edge2" << endl;
   Matrix *mat = new Matrix; // create a Matrix in dynamic memory
 
   const int width = 1;
@@ -123,6 +130,7 @@ TEST(test_fill_edge2)
 }
 TEST(test_width_height_print_basic)
 {
+  cout << "testing width height basic" << endl;
   Matrix *mat = new Matrix;
   const int width = 5;
   const int height = 7;
@@ -136,6 +144,7 @@ TEST(test_width_height_print_basic)
 }
 TEST(test_width_height_print_edge)
 {
+  cout << "testing width height edge" << endl;
   Matrix *mat = new Matrix;
   const int width = 1;
   const int height = 1;
@@ -149,6 +158,7 @@ TEST(test_width_height_print_edge)
 }
 TEST(test_at_basic)
 {
+  cout << "testing at basic" << endl;
   Matrix *mat = new Matrix;
   Matrix_init(mat, 2, 3);
   Matrix_fill(mat, 21);
@@ -163,6 +173,7 @@ TEST(test_at_basic)
 }
 TEST(test_at_edge)
 {
+  cout << "testing at edge" << endl;
   Matrix *mat = new Matrix;
   Matrix_init(mat, 1, 1);
   Matrix_fill(mat, 21);
@@ -177,6 +188,7 @@ TEST(test_at_edge)
 }
 TEST(test_row_column_basic)
 {
+  cout << "testing row column basic" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 2, 3);
@@ -191,6 +203,7 @@ TEST(test_row_column_basic)
 }
 TEST(test_row_column_edge)
 {
+  cout << "testing row column edge" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 1, 1);
@@ -203,6 +216,7 @@ TEST(test_row_column_edge)
 
 TEST(test_fill_border_basic)
 {
+  cout << "testing fill border basic" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 3, 3);
@@ -214,6 +228,7 @@ TEST(test_fill_border_basic)
 }
 TEST(test_fill_border_edge)
 {
+  cout << "testing fill border edge" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 1, 1);
@@ -225,6 +240,7 @@ TEST(test_fill_border_edge)
 }
 TEST(test_max_basic)
 {
+  cout << "testing max basic" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 3, 3);
@@ -236,6 +252,7 @@ TEST(test_max_basic)
 }
 TEST(test_max_edge1)
 {
+  cout << "testing max edge1" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 500, 500);
@@ -246,6 +263,7 @@ TEST(test_max_edge1)
 }
 TEST(test_max_edge2)
 {
+  cout << "testing max edge2" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 1, 1);
@@ -255,6 +273,7 @@ TEST(test_max_edge2)
 }
 TEST(test_min_basic)
 {
+  cout << "testing min basic" << endl;
   Matrix *mat = new Matrix;
   const int value = 7;
   Matrix_init(mat, 3, 3);
@@ -262,12 +281,15 @@ TEST(test_min_basic)
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 2), 0);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 1, 0, 2), 1);
+  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 1), 0);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 2), 10);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 1, 0, 2), 7);
+  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 1), 10);
   delete mat;
 }
 TEST(test_min_edge)
 {
+  cout << "testing min edge" << endl;
   Matrix *mat = new Matrix;
   const int value = 7;
   Matrix_init(mat, 1, 1);
@@ -277,6 +299,7 @@ TEST(test_min_edge)
 
   delete mat;
 }
+
 // ADD YOUR TESTS HERE
 // You are encouraged to use any functions from Matrix_test_helpers.h as needed.
 
