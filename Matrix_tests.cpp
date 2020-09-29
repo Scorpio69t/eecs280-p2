@@ -49,17 +49,7 @@ TEST(test_init_basic)
   ASSERT_EQUAL(height, Matrix_height(mat));
   delete mat;
 }
-// TEST(test_init_edge)
-// {
-//   std::string input = "3 3 3 3";
-//   Matrix *mat = new Matrix;
-//   Matrix *load = new Matrix;
-//   Matrix_init(mat, 2, 2);
-//   Matrix_fill(mat, 3);
-//   istringstream in(input);
 
-//   Matrix_init(mat, in);
-// }
 TEST(test_init_edge)
 {
   Matrix *mat = new Matrix;
@@ -171,6 +161,20 @@ TEST(test_at_basic)
   ASSERT_EQUAL(*Matrix_at(mat, 1, 1), 40);
   delete mat;
 }
+TEST(test_at_edge)
+{
+  Matrix *mat = new Matrix;
+  Matrix_init(mat, 1, 1);
+  Matrix_fill(mat, 21);
+  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 21);
+  Matrix_fill(mat, 40);
+  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 40);
+
+  const Matrix *m = mat;
+  ASSERT_EQUAL(*Matrix_at(m, 0, 0), 40);
+  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 40);
+  delete mat;
+}
 TEST(test_row_column_basic)
 {
   Matrix *mat = new Matrix;
@@ -180,6 +184,9 @@ TEST(test_row_column_basic)
   int *location = Matrix_at(mat, 2, 1);
   ASSERT_EQUAL(Matrix_row(mat, location), 2);
   ASSERT_EQUAL(Matrix_column(mat, location), 1);
+  location = Matrix_at(mat, 0, 0);
+  ASSERT_EQUAL(Matrix_row(mat, location), 0);
+  ASSERT_EQUAL(Matrix_column(mat, location), 0);
   delete mat;
 }
 TEST(test_row_column_edge)
@@ -209,10 +216,11 @@ TEST(test_fill_border_edge)
 {
   Matrix *mat = new Matrix;
   const int value = 21;
-  Matrix_init(mat, 2, 2);
+  Matrix_init(mat, 1, 1);
   Matrix_fill(mat, value);
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 10);
+
   delete mat;
 }
 TEST(test_max_basic)
