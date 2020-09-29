@@ -3,6 +3,10 @@
 #include "Matrix.h"
 #include "Matrix_test_helpers.h"
 #include "unit_test_framework.h"
+#include "iostream"
+#include "fstream"
+#include "sstream"
+#include "string"
 
 using namespace std;
 
@@ -12,6 +16,18 @@ using namespace std;
 // -----
 // Fills a 3x5 Matrix with a value and checks
 // that Matrix_at returns that value for each element.
+TEST(test_print_basic)
+{
+  std::string correct = "2 2\n2 2 \n2 2 \n";
+  Matrix *mat = new Matrix;
+  Matrix_init(mat, 2, 2);
+  Matrix_fill(mat, 2);
+  ostringstream out;
+  Matrix_print(mat, out);
+  ASSERT_EQUAL(correct, out.str());
+  delete mat;
+}
+
 TEST(test_init_basic)
 {
   Matrix *mat = new Matrix;
@@ -20,7 +36,19 @@ TEST(test_init_basic)
   Matrix_init(mat, 3, 5);
   ASSERT_EQUAL(width, Matrix_width(mat));
   ASSERT_EQUAL(height, Matrix_height(mat));
+  delete mat;
 }
+// TEST(test_init_edge)
+// {
+//   std::string input = "3 3 3 3";
+//   Matrix *mat = new Matrix;
+//   Matrix *load = new Matrix;
+//   Matrix_init(mat, 2, 2);
+//   Matrix_fill(mat, 3);
+//   istringstream in(input);
+
+//   Matrix_init(mat, in);
+// }
 TEST(test_init_edge)
 {
   Matrix *mat = new Matrix;
@@ -29,6 +57,7 @@ TEST(test_init_edge)
   Matrix_init(mat, 1, 1);
   ASSERT_EQUAL(width, Matrix_width(mat));
   ASSERT_EQUAL(height, Matrix_height(mat));
+  delete mat;
 }
 
 TEST(test_fill_basic)
@@ -176,7 +205,7 @@ TEST(test_fill_border_edge)
 {
   Matrix *mat = new Matrix;
   const int value = 21;
-  Matrix_init(mat, 1, 1);
+  Matrix_init(mat, 2, 2);
   Matrix_fill(mat, value);
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 10);
