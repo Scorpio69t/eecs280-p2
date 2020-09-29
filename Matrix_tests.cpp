@@ -294,10 +294,12 @@ TEST(test_min_basic)
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 2), 0);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 1, 0, 2), 1);
-  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 1), 0);
+  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 500), 0);
+  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 1, 0, 500), 1);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 2), 10);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 1, 0, 2), 7);
-  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 1), 10);
+  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 500), 10);
+  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 1, 0, 500), 7);
   Matrix_fill_border(mat, -10);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 2), 0);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 1, 0, 2), 0);
