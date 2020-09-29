@@ -161,8 +161,8 @@ TEST(test_at_basic)
   cout << "testing at basic" << endl;
   Matrix *mat = new Matrix;
   Matrix_init(mat, 2, 3);
-  Matrix_fill(mat, 21);
-  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 21);
+  Matrix_fill(mat, -21);
+  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), -21);
   Matrix_fill(mat, 40);
   ASSERT_EQUAL(*Matrix_at(mat, 1, 1), 40);
 
@@ -176,8 +176,8 @@ TEST(test_at_edge)
   cout << "testing at edge" << endl;
   Matrix *mat = new Matrix;
   Matrix_init(mat, 1, 1);
-  Matrix_fill(mat, 21);
-  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 21);
+  Matrix_fill(mat, -21);
+  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), -21);
   Matrix_fill(mat, 40);
   ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 40);
 
@@ -243,7 +243,7 @@ TEST(test_fill_border_edge2)
   cout << "testing fill border edge2" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
-  Matrix_init(mat, 3, 3);
+  Matrix_init(mat, 500, 500);
   Matrix_fill(mat, value);
   Matrix_fill_border(mat, -10);
   ASSERT_EQUAL(*Matrix_at(mat, 0, 0), -10);
@@ -268,7 +268,7 @@ TEST(test_max_edge1)
   cout << "testing max edge1" << endl;
   Matrix *mat = new Matrix;
   const int value = -21;
-  Matrix_init(mat, 4, 4);
+  Matrix_init(mat, 500, 500);
   Matrix_fill(mat, value);
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(Matrix_max(mat), 10);
@@ -289,7 +289,7 @@ TEST(test_min_basic)
   cout << "testing min basic" << endl;
   Matrix *mat = new Matrix;
   const int value = 7;
-  Matrix_init(mat, 3, 3);
+  Matrix_init(mat, 500, 500);
   Matrix_fill(mat, value);
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 2), 0);
