@@ -160,23 +160,16 @@ TEST(test_width_height_print_edge)
 TEST(test_at_basic)
 {
   Matrix *mat = new Matrix;
-  const int value = 21;
   Matrix_init(mat, 2, 3);
-  Matrix_fill(mat, value);
+  Matrix_fill(mat, 21);
   ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 21);
   Matrix_fill(mat, 40);
   ASSERT_EQUAL(*Matrix_at(mat, 1, 1), 40);
-  delete mat;
 
-  // const Matrix *mat1 = new Matrix;
-  // Matrix_init(mat1, 3, 4);
-  // Matrix_fill(mat1, value);
-  // ASSERT_EQUAL(*Matrix_at(mat1, 0, 1), 7);
-  // ASSERT_EQUAL(*Matrix_at(mat1, 1, 2), 7);
-  // Matrix_fill(mat1, 98);
-  // const int value = *Matrix_at(mat,1 0, 2);
-  // ASSERT_EQUAL(value, 98);
-  // delete mat;
+  const Matrix *m = mat;
+  ASSERT_EQUAL(*Matrix_at(m, 0, 0), 40);
+  ASSERT_EQUAL(*Matrix_at(mat, 1, 1), 40);
+  delete mat;
 }
 TEST(test_row_column_basic)
 {
@@ -228,6 +221,7 @@ TEST(test_max_basic)
   const int value = 21;
   Matrix_init(mat, 3, 3);
   Matrix_fill(mat, value);
+  ASSERT_EQUAL(Matrix_max(mat), 21);
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(Matrix_max(mat), 21);
   delete mat;
