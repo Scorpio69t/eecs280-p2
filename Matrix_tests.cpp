@@ -91,10 +91,10 @@ TEST(test_fill_edge1)
   cout << "testing fill edge1" << endl;
   Matrix *mat = new Matrix; // create a Matrix in dynamic memory
 
-  const int width = 500;
-  const int height = 500;
-  const int value = 42;
-  Matrix_init(mat, 500, 500);
+  const int width = 5;
+  const int height = 5;
+  const int value = -42;
+  Matrix_init(mat, 5, 5);
   Matrix_fill(mat, value);
 
   for (int r = 0; r < height; ++r)
@@ -226,15 +226,28 @@ TEST(test_fill_border_basic)
   ASSERT_EQUAL(*Matrix_at(mat, 1, 1), 21);
   delete mat;
 }
-TEST(test_fill_border_edge)
+TEST(test_fill_border_edge1)
 {
-  cout << "testing fill border edge" << endl;
+  cout << "testing fill border edge1" << endl;
   Matrix *mat = new Matrix;
   const int value = 21;
   Matrix_init(mat, 1, 1);
   Matrix_fill(mat, value);
   Matrix_fill_border(mat, 10);
   ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 10);
+
+  delete mat;
+}
+TEST(test_fill_border_edge2)
+{
+  cout << "testing fill border edge2" << endl;
+  Matrix *mat = new Matrix;
+  const int value = 21;
+  Matrix_init(mat, 3, 3);
+  Matrix_fill(mat, value);
+  Matrix_fill_border(mat, -10);
+  ASSERT_EQUAL(*Matrix_at(mat, 0, 0), -10);
+  ASSERT_EQUAL(*Matrix_at(mat, 1, 1), 21);
 
   delete mat;
 }
@@ -254,11 +267,11 @@ TEST(test_max_edge1)
 {
   cout << "testing max edge1" << endl;
   Matrix *mat = new Matrix;
-  const int value = 21;
-  Matrix_init(mat, 500, 500);
+  const int value = -21;
+  Matrix_init(mat, 4, 4);
   Matrix_fill(mat, value);
   Matrix_fill_border(mat, 10);
-  ASSERT_EQUAL(Matrix_max(mat), 21);
+  ASSERT_EQUAL(Matrix_max(mat), 10);
   delete mat;
 }
 TEST(test_max_edge2)
@@ -285,6 +298,13 @@ TEST(test_min_basic)
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 2), 10);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 1, 0, 2), 7);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 1), 10);
+  Matrix_fill_border(mat, -10);
+  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 2), 0);
+  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 1, 0, 2), 0);
+  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 1), 0);
+  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 2), -10);
+  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 1, 0, 2), -10);
+  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 1), -10);
   delete mat;
 }
 TEST(test_min_edge)
