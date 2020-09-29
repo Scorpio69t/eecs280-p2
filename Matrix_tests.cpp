@@ -27,6 +27,17 @@ TEST(test_print_basic)
   ASSERT_EQUAL(correct, out.str());
   delete mat;
 }
+TEST(test_print_edge)
+{
+  std::string correct = "1 1\n1 \n";
+  Matrix *mat = new Matrix;
+  Matrix_init(mat, 1, 1);
+  Matrix_fill(mat, 1);
+  ostringstream out;
+  Matrix_print(mat, out);
+  ASSERT_EQUAL(correct, out.str());
+  delete mat;
+}
 
 TEST(test_init_basic)
 {
