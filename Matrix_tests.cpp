@@ -12,6 +12,25 @@ using namespace std;
 // -----
 // Fills a 3x5 Matrix with a value and checks
 // that Matrix_at returns that value for each element.
+TEST(test_init_basic)
+{
+  Matrix *mat = new Matrix;
+  const int width = 3;
+  const int height = 5;
+  Matrix_init(mat, 3, 5);
+  ASSERT_EQUAL(width, Matrix_width(mat));
+  ASSERT_EQUAL(height, Matrix_height(mat));
+}
+TEST(test_init_edge)
+{
+  Matrix *mat = new Matrix;
+  const int width = 1;
+  const int height = 1;
+  Matrix_init(mat, 1, 1);
+  ASSERT_EQUAL(width, Matrix_width(mat));
+  ASSERT_EQUAL(height, Matrix_height(mat));
+}
+
 TEST(test_fill_basic)
 {
   Matrix *mat = new Matrix; // create a Matrix in dynamic memory
@@ -130,6 +149,18 @@ TEST(test_row_column_basic)
   ASSERT_EQUAL(Matrix_column(mat, location), 1);
   delete mat;
 }
+TEST(test_row_column_edge)
+{
+  Matrix *mat = new Matrix;
+  const int value = 21;
+  Matrix_init(mat, 1, 1);
+  Matrix_fill(mat, value);
+  int *location = Matrix_at(mat, 0, 0);
+  ASSERT_EQUAL(Matrix_row(mat, location), 0);
+  ASSERT_EQUAL(Matrix_column(mat, location), 0);
+  delete mat;
+}
+
 TEST(test_fill_border_basic)
 {
   Matrix *mat = new Matrix;
