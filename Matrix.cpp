@@ -64,6 +64,7 @@ int Matrix_height(const Matrix *mat)
 // EFFECTS:  Returns the row of the element pointed to by ptr.
 int Matrix_row(const Matrix *mat, const int *ptr)
 {
+  assert(ptr >= mat->data && ptr < mat->data + (mat->width * mat->height));
   int length = ptr - mat->data;
 
   return length / mat->width;
@@ -74,7 +75,7 @@ int Matrix_row(const Matrix *mat, const int *ptr)
 // EFFECTS:  Returns the column of the element pointed to by ptr.
 int Matrix_column(const Matrix *mat, const int *ptr)
 {
-
+  assert(ptr >= mat->data && ptr < mat->data + (mat->width * mat->height));
   int length = ptr - mat->data;
 
   return length % mat->width;

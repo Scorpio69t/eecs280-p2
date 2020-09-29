@@ -301,10 +301,10 @@ TEST(test_min_basic)
   Matrix_fill_border(mat, -10);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 2), 0);
   ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 1, 0, 2), 0);
-  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 1), 0);
+  ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 500), 0);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 2), -10);
   ASSERT_EQUAL(Matrix_min_value_in_row(mat, 1, 0, 2), -10);
-  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 1), -10);
+  ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 500), -10);
   delete mat;
 }
 TEST(test_min_edge)
